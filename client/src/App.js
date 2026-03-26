@@ -82,9 +82,12 @@ function App() {
       } else {
         console.log('User document already exists');
       }
-    } catch (error) { 
+    } catch (error) {
       console.error('Google sign-in error:', error);
-      alert('Google sign-in failed: ' + error.message);
+      const friendlyMessage = error.code === 'auth/unauthorized-domain'
+        ? 'Unauthorized domain: add https://processeffectivenesstool.netlify.app to Firebase Auth > Sign-in method > Authorized domains.'
+        : error.message;
+      alert('Google sign-in failed: ' + friendlyMessage);
     }
   };
 
